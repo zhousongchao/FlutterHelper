@@ -1,0 +1,49 @@
+<idea-plugin>
+    <id>com.zsc.flutter.help</id>
+    <name>FlutterHelp</name>
+    <vendor email="zhou_songchao@foxmail.com"
+            url="https://github.com/zhousongchao/zsc">
+    </vendor>
+    <idea-version since-build="192.0"/>
+    <description>
+        A plugin for flutter make easy to use assets file.
+    </description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="dart-ext.xml">Dart</depends>
+    <!--    <depends>com.intellij.modules.</depends>-->
+
+    <extensions defaultExtensionNs="com.intellij">
+
+        <!--        行标记-->
+        <codeInsight.lineMarkerProvider language="Dart"
+                                        implementationClass="com.zsc.flutter.help.mark.SvgLineMarkerProvider"/>
+
+
+    </extensions>
+    <extensions defaultExtensionNs="Dart">
+
+        <!--        <completionExtension implementation="com.zsc.flutter.dart.MyDartCompletionExtension" order="first"/>-->
+    </extensions>
+    <applicationListeners>
+        <!--    监听文件改动自动生成文件   -->
+        <listener class="com.zsc.flutter.help.AssertFileListener"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+        <!--        <listener class="com.zsc.flutter.help.MyListener" topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>-->
+    </applicationListeners>
+
+    <actions>
+        <!-- Add your actions here -->
+        <!--<action id="LangFileListener" class="com.zsc.flutter.help.LangFileAction" text="LangKeysRefresh"
+                description="Flutter helper">
+            <add-to-group group-id="CodeMenu" anchor="first"/>
+        </action>-->
+        <action id="FlutterAssetsRefresh" class="com.zsc.flutter.help.FlutterAssetsRefreshAction"
+                text="FlutterAssetsRefresh"
+                description="Flutter helper">
+            <add-to-group group-id="CodeMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
